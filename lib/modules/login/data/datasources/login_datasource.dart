@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 import '../model/account_model.dart';
@@ -7,6 +5,8 @@ import '../model/account_model.dart';
 abstract class ILoginDatasource {
   Future<AccountModel> login({required String email, required String password});
   Future<List<AccountModel>> getAccounts();
+  Future<AccountModel> getAccountById({required String id});
+  Future<bool> deleteAccount({required String id});
 }
 
 class LoginDatasource implements ILoginDatasource {
@@ -33,6 +33,29 @@ class LoginDatasource implements ILoginDatasource {
       'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login',
     );
 
-    return jsonDecode(response.data).map<AccountModel>((account) => AccountModel.fromJson(account)).toList();
+    return AccountModel.fromListMap(response.data);
+  }
+
+  @override
+  Future<AccountModel> getAccountById({required String id}) async {
+    final response = await dio.get(
+      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login/:id',
+      data: {'id': id},
+    );
+
+    return AccountModel.fromJson(response.data);
+  }
+
+  @override
+  Future<bool> deleteAccount({required String id}) async {
+    final response = await dio.delete(
+      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login/:id',
+      data: {'id': id},
+    );
+
+    if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      return true;
+    }
+    return false;
   }
 }

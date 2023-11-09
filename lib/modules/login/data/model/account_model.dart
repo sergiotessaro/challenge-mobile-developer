@@ -1,13 +1,15 @@
-import 'package:student_listing/modules/login/domain/entities/account_entity.dart';
+import 'dart:core';
 
-class AccountModel {
+import 'package:equatable/equatable.dart';
+
+class AccountModel extends Equatable {
   final String? createdAt;
   final String? email;
   final String? token;
   final String? password;
   final String? id;
 
-  AccountModel({
+  const AccountModel({
     this.createdAt,
     this.email,
     this.token,
@@ -23,21 +25,14 @@ class AccountModel {
         id: json["id"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "createdAt": createdAt,
-        "email": email,
-        "token": token,
-        "password": password,
-        "id": id,
-      };
+  static List<AccountModel> fromListMap(List maps) => maps.map((e) => AccountModel.fromJson(e)).toList();
 
-  AccountEntity toEntity() {
-    return AccountEntity(
-      createdAt: createdAt,
-      email: email,
-      id: id,
-      password: password,
-      token: token,
-    );
-  }
+  @override
+  List<Object?> get props => [
+        createdAt,
+        email,
+        id,
+        password,
+        token,
+      ];
 }

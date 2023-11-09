@@ -32,7 +32,7 @@ abstract class _LoginControllerBase with Store {
   loginAction() async {
     loading = true;
 
-    final response = await loginUseCase.call(email: emailController.text, password: passwordController.text);
+    final response = await loginUseCase.login(email: emailController.text, password: passwordController.text);
 
     response.fold((error) {}, (success) {
       print(success);
