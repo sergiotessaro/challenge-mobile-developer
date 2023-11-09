@@ -16,7 +16,6 @@ dependencies:
   mobx_codegen: ^2.4.0
   dartz: ^0.10.1
   cupertino_icons: ^1.0.2
-  http_mock_adapter: ^0.6.0
   flutter_modular: ^6.3.2
   equatable: ^2.0.5
 
