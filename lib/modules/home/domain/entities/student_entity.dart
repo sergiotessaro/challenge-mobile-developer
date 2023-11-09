@@ -4,10 +4,11 @@ import 'package:student_listing/modules/home/data/model/student_model.dart';
 class StudentEntity extends Equatable {
   final String? createdAt;
   final String? name;
-  final String? birthdate;
-  final String? cpf;
+  final int? birthdate;
+  final int? cpf;
   final String? email;
-  final String? academicRecord;
+  final int? academicRecord;
+  final int? academicRecord2;
   final String? id;
 
   const StudentEntity({
@@ -17,6 +18,7 @@ class StudentEntity extends Equatable {
     this.birthdate,
     this.id,
     this.academicRecord,
+    this.academicRecord2,
     this.cpf,
   });
 
@@ -28,6 +30,7 @@ class StudentEntity extends Equatable {
       name: name!,
       birthdate: birthdate!,
       academicRecord: academicRecord!,
+      academicRecord2: academicRecord2!,
       cpf: cpf!,
     );
   }
@@ -40,6 +43,7 @@ class StudentEntity extends Equatable {
         cpf,
         email,
         academicRecord,
+        academicRecord2,
         id,
       ];
 }

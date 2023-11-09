@@ -3,10 +3,11 @@ import 'package:equatable/equatable.dart';
 class StudentModel extends Equatable {
   final String createdAt;
   final String name;
-  final String birthdate;
-  final String cpf;
+  final int birthdate;
+  final int cpf;
   final String email;
-  final String academicRecord;
+  final int academicRecord;
+  final int academicRecord2;
   final String id;
 
   const StudentModel({
@@ -16,6 +17,7 @@ class StudentModel extends Equatable {
     required this.cpf,
     required this.email,
     required this.academicRecord,
+    required this.academicRecord2,
     required this.id,
   });
 
@@ -26,6 +28,7 @@ class StudentModel extends Equatable {
         cpf: json["cpf"],
         email: json["email"],
         academicRecord: json["academic_record"],
+        academicRecord2: json["academicRecord"],
         id: json["id"],
       );
 
@@ -47,6 +50,7 @@ class StudentModel extends Equatable {
         cpf,
         email,
         academicRecord,
+        academicRecord2,
         id,
       ];
 }

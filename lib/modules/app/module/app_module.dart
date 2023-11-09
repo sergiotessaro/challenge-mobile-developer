@@ -1,11 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:student_listing/modules/home/data/datasources/student_datasource.dart';
+import 'package:student_listing/modules/home/data/repositories/student_repository.dart';
+import 'package:student_listing/modules/home/domain/usecases/student_usecase.dart';
 import 'package:student_listing/modules/login/data/datasources/login_datasource.dart';
 import 'package:student_listing/modules/login/data/repositories/login_repository.dart';
 import 'package:student_listing/modules/login/domain/usecases/login_usecase.dart';
 import 'package:student_listing/modules/login/presentation/controller/login_controller.dart';
 import 'package:student_listing/modules/login/presentation/views/login_page.dart';
 
+import '../../home/presentation/controller/student_controller.dart';
 import '../../home/presentation/views/home_page.dart';
 
 class AppModule extends Module {
@@ -20,12 +24,16 @@ class AppModule extends Module {
     });
     //repository
     i.add(LoginRepository.new);
+    i.add(StudentRepository.new);
     //datasource
     i.add(LoginDatasource.new);
+    i.add(StudentDatasource.new);
     //usecases
     i.add(LoginUseCase.new);
+    i.add(StudentUseCase.new);
     //controller
     i.add(LoginController.new);
+    i.add(StudentController.new);
   }
 
   @override

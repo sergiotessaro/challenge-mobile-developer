@@ -5,6 +5,8 @@
     - S: Responsabilidade única, por exemplo, a classe de LoginDatasource, ela é responsável apenas pelas funções de login do app.
     - O: Aberto/Fechado, utilizando do mesmo exemplo, a interface de LoginDatasource está aberta a extensões sem ter que refatorar a classe, assim deixando-a fechada para modificações.
     - I: Segregar as interfaces, fazendo com que cada uma seja responsável por uma parte do processo de login.
+-Gerenciamento de Estado:
+    - Utilizado o MobX por ser um gerenciamento de estado simples de implementar e performático para aplicativos menores.
 
 #### Lista de bibliotecas utilizadas e suas respectivas versões
 
