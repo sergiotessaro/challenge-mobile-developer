@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // controller.getAccountLocallyAndLoginAutomatically(context);
+    controller.getAccountLocallyAndLoginAutomatically(context);
     super.initState();
   }
 
