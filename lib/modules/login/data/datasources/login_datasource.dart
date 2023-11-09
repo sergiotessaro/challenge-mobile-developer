@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import '../model/account_model.dart';
 
 abstract class ILoginDatasource {
-  Future<AccountModel> login({required String email, required String password});
+  Future<AccountModel> register({required String email, required String password});
   Future<List<AccountModel>> getAccounts();
   Future<AccountModel> getAccountById({required String id});
   Future<bool> deleteAccount({required String id});
@@ -15,7 +15,7 @@ class LoginDatasource implements ILoginDatasource {
   LoginDatasource({required this.dio});
 
   @override
-  Future<AccountModel> login({required String email, required String password}) async {
+  Future<AccountModel> register({required String email, required String password}) async {
     final response = await dio.post(
       'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login',
       data: {
@@ -39,8 +39,7 @@ class LoginDatasource implements ILoginDatasource {
   @override
   Future<AccountModel> getAccountById({required String id}) async {
     final response = await dio.get(
-      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login/:id',
-      data: {'id': id},
+      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login/$id',
     );
 
     return AccountModel.fromJson(response.data);
@@ -49,8 +48,7 @@ class LoginDatasource implements ILoginDatasource {
   @override
   Future<bool> deleteAccount({required String id}) async {
     final response = await dio.delete(
-      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login/:id',
-      data: {'id': id},
+      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login/$id',
     );
 
     if (response.statusCode! >= 200 && response.statusCode! < 300) {

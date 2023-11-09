@@ -6,6 +6,8 @@ import 'package:student_listing/modules/login/domain/usecases/login_usecase.dart
 import 'package:student_listing/modules/login/presentation/controller/login_controller.dart';
 import 'package:student_listing/modules/login/presentation/views/login_page.dart';
 
+import '../../home/presentation/views/home_page.dart';
+
 class AppModule extends Module {
   @override
   void binds(i) {
@@ -28,6 +30,8 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => LoginPage());
+    r.child('/', child: (context) => const LoginPage());
+
+    r.child('/home_page', child: (context) => HomePage(accountEntity: r.args.data));
   }
 }

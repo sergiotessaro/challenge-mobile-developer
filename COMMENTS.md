@@ -6,7 +6,7 @@
     - O: Aberto/Fechado, utilizando do mesmo exemplo, a interface de LoginDatasource está aberta a extensões sem ter que refatorar a classe, assim deixando-a fechada para modificações.
     - I: Segregar as interfaces, fazendo com que cada uma seja responsável por uma parte do processo de login.
 
-#### Lista de bibliotecas utilizadas e suas devidas versões
+#### Lista de bibliotecas utilizadas e suas respectivas versões
 
     -mobx: ^2.2.1
     -dio: ^5.3.3
@@ -18,4 +18,4 @@
     -equatable: ^2.0.5
     -mocktail: ^0.3.0
     -build_runner: ^2.0.5
-
+    -shared_preferences: ^2.2.2

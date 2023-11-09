@@ -5,7 +5,7 @@ import 'package:student_listing/modules/login/domain/entities/account_entity.dar
 import '../../../app/error/error.dart';
 
 abstract class ILoginUseCase {
-  Future<Either<Failure, AccountEntity>> login({required String email, required String password});
+  Future<Either<Failure, AccountEntity>> register({required String email, required String password});
   Future<Either<Failure, List<AccountEntity>>> getAccounts();
   Future<Either<Failure, AccountEntity>> getAccountById({required String id});
 }
@@ -16,8 +16,8 @@ class LoginUseCase implements ILoginUseCase {
   LoginUseCase(this.loginRepository);
 
   @override
-  Future<Either<Failure, AccountEntity>> login({required String email, required String password}) async {
-    return await loginRepository.login(email: email, password: password);
+  Future<Either<Failure, AccountEntity>> register({required String email, required String password}) async {
+    return await loginRepository.register(email: email, password: password);
   }
 
   @override

@@ -9,22 +9,6 @@ part of 'login_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginController on _LoginControllerBase, Store {
-  late final _$entityAtom =
-      Atom(name: '_LoginControllerBase.entity', context: context);
-
-  @override
-  AccountEntity get entity {
-    _$entityAtom.reportRead();
-    return super.entity;
-  }
-
-  @override
-  set entity(AccountEntity value) {
-    _$entityAtom.reportWrite(value, super.entity, () {
-      super.entity = value;
-    });
-  }
-
   late final _$loadingAtom =
       Atom(name: '_LoginControllerBase.loading', context: context);
 
@@ -57,18 +41,41 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  late final _$loginActionAsyncAction =
-      AsyncAction('_LoginControllerBase.loginAction', context: context);
+  late final _$getAccountLocallyAndLoginAutomaticallyAsyncAction = AsyncAction(
+      '_LoginControllerBase.getAccountLocallyAndLoginAutomatically',
+      context: context);
 
   @override
-  Future loginAction() {
-    return _$loginActionAsyncAction.run(() => super.loginAction());
+  Future getAccountLocallyAndLoginAutomatically(BuildContext context) {
+    return _$getAccountLocallyAndLoginAutomaticallyAsyncAction
+        .run(() => super.getAccountLocallyAndLoginAutomatically(context));
+  }
+
+  late final _$registerActionAsyncAction =
+      AsyncAction('_LoginControllerBase.registerAction', context: context);
+
+  @override
+  Future registerAction(BuildContext context) {
+    return _$registerActionAsyncAction.run(() => super.registerAction(context));
+  }
+
+  late final _$_LoginControllerBaseActionController =
+      ActionController(name: '_LoginControllerBase', context: context);
+
+  @override
+  dynamic showDialogInPage(BuildContext context, String message) {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.showDialogInPage');
+    try {
+      return super.showDialogInPage(context, message);
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-entity: ${entity},
 loading: ${loading},
 obscurePassword: ${obscurePassword}
     ''';

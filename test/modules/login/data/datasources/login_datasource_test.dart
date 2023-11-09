@@ -35,7 +35,7 @@ void main() {
           ));
 
       // Act
-      final result = await loginDatasource.login(email: email, password: password);
+      final result = await loginDatasource.register(email: email, password: password);
 
       // Assert
       expect(result, isA<AccountModel>());

@@ -13,9 +13,9 @@ class LoginRepository implements ILoginRepository {
   LoginRepository(this._loginDatasource);
 
   @override
-  Future<Either<Failure, AccountEntity>> login({required String email, required String password}) async {
+  Future<Either<Failure, AccountEntity>> register({required String email, required String password}) async {
     try {
-      final response = await _loginDatasource.login(email: email, password: password);
+      final response = await _loginDatasource.register(email: email, password: password);
       return Right(response.toEntity());
     } on TimeoutException {
       return Left(Failure.timeout());

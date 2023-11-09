@@ -28,25 +28,25 @@ void main() {
       test('should return Right(true) when login is successful', () async {
         // Arrange
 
-        when(() => mockDatasource.login(email: any(named: 'email'), password: any(named: 'password'))).thenAnswer((invocation) async => accountModel);
+        when(() => mockDatasource.register(email: any(named: 'email'), password: any(named: 'password'))).thenAnswer((invocation) async => accountModel);
 
         // Act
-        final result = await repository.login(email: 'teste', password: 'teste123');
+        final result = await repository.register(email: 'teste', password: 'teste123');
 
         // Assert
         expect(result.isRight(), true);
-        verify(() => mockDatasource.login(email: 'teste', password: 'teste123')).called(1);
+        verify(() => mockDatasource.register(email: 'teste', password: 'teste123')).called(1);
       });
 
       test(
         'should return Right(false) when login fails',
         () async {
-          when(() => mockDatasource.login(email: any(named: 'email'), password: any(named: 'password'))).thenThrow(TimeoutException('Timeout'));
+          when(() => mockDatasource.register(email: any(named: 'email'), password: any(named: 'password'))).thenThrow(TimeoutException('Timeout'));
 
-          final result = await repository.login(email: 'teste', password: 'teste123');
+          final result = await repository.register(email: 'teste', password: 'teste123');
 
           expect(result.fold(id, id), isA<Failure>());
-          verify(() => mockDatasource.login(email: 'teste', password: 'teste123')).called(1);
+          verify(() => mockDatasource.register(email: 'teste', password: 'teste123')).called(1);
         },
       );
     },
