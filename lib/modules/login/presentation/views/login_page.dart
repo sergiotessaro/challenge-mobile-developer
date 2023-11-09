@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    controller.getAccountLocallyAndLoginAutomatically(context);
+    // controller.getAccountLocallyAndLoginAutomatically(context);
     super.initState();
   }
 
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                 children: [
                                   TextButton(
                                     onPressed: () {
-                                      // controller.showDialogInPage(context);
+                                      controller.showDialogInPage(context, 'Funcionalidade em\nconstrução');
                                     },
                                     child: const Text(
                                       'Esqueci o usuário',
@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      controller.getAccountLocallyAndLoginAutomatically(context);
+                                      controller.loginAction(context);
                                     }
                                   },
                                   child: const Text('Entrar'),

@@ -41,6 +41,14 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  late final _$loginActionAsyncAction =
+      AsyncAction('_LoginControllerBase.loginAction', context: context);
+
+  @override
+  Future loginAction(BuildContext context) {
+    return _$loginActionAsyncAction.run(() => super.loginAction(context));
+  }
+
   late final _$getAccountLocallyAndLoginAutomaticallyAsyncAction = AsyncAction(
       '_LoginControllerBase.getAccountLocallyAndLoginAutomatically',
       context: context);

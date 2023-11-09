@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:student_listing/modules/login/domain/entities/account_entity.dart';
 
 import '../../domain/usecases/login_usecase.dart';
 
@@ -30,10 +29,41 @@ abstract class _LoginControllerBase with Store {
   bool obscurePassword = false;
 
   @action
+  loginAction(BuildContext context) async {
+    loading = true;
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    final response = await loginUseCase.getAccounts();
+
+    response.fold((error) {
+      showDialogInPage(context, 'Erro no login!\nmensagem de erro:\n$error');
+    }, (entityList) {
+      for (var entity in entityList) {
+        if (entity.email == emailController.text && entity.password == passwordController.text) {
+          sharedPreferences.setString(
+              'account',
+              jsonEncode({
+                "createdAt": "${entity.createdAt}",
+                "email": "${entity.email}",
+                "token": "${entity.token}",
+                "password": "${entity.password}",
+                "id": "${entity.id}",
+              }));
+          Modular.to.pushNamed('home_page', arguments: entity);
+        } else {
+          showDialogInPage(context, 'Email ou senha incorretos!');
+        }
+      }
+    });
+
+    loading = false;
+  }
+
+  @action
   getAccountLocallyAndLoginAutomatically(BuildContext context) async {
     loading = true;
     final sharedPreferences = await SharedPreferences.getInstance();
-    
+
     Map<String, dynamic>? account;
 
     if (sharedPreferences.containsKey('account')) {
@@ -42,8 +72,8 @@ abstract class _LoginControllerBase with Store {
 
     final response = await loginUseCase.getAccountById(id: account!['id']);
 
-    response.fold((l) {
-      showDialogInPage(context, 'Erro no login');
+    response.fold((error) {
+      showDialogInPage(context, 'Erro no login!\nmensagem de erro:\n$error');
     }, (entity) {
       Modular.to.pushNamed('home_page', arguments: entity);
     });
@@ -59,7 +89,7 @@ abstract class _LoginControllerBase with Store {
     final response = await loginUseCase.register(email: emailController.text, password: passwordController.text);
 
     response.fold((error) {
-      showDialogInPage(context, 'Erro no login');
+      showDialogInPage(context, 'Erro no login!\nmensagem de erro:\n$error');
     }, (entity) {
       sharedPreferences.setString(
           'account',
@@ -82,10 +112,22 @@ abstract class _LoginControllerBase with Store {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            content: Text(
-              message,
-              textAlign: TextAlign.center,
+          return SizedBox(
+            width: 250,
+            child: AlertDialog(
+              content: Text(
+                message,
+                textAlign: TextAlign.center,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Modular.to.pop(),
+                  child: const Text(
+                    'OK',
+                    style: TextStyle(color: Color(0xff2f617e)),
+                  ),
+                )
+              ],
             ),
           );
         });
