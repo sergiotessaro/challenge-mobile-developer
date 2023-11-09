@@ -25,7 +25,7 @@ class AccountModel extends Equatable {
         id: json["id"],
       );
 
-  static List<AccountModel> fromListMap(List maps) => maps.map((e) => AccountModel.fromJson(e)).toList();
+  static List<AccountModel> fromListJson(List maps) => maps.map((e) => AccountModel.fromJson(e)).toList();
 
   @override
   List<Object?> get props => [

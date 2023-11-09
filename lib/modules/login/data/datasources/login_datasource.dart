@@ -33,7 +33,7 @@ class LoginDatasource implements ILoginDatasource {
       'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/login',
     );
 
-    return AccountModel.fromListMap(response.data);
+    return AccountModel.fromListJson(response.data);
   }
 
   @override
