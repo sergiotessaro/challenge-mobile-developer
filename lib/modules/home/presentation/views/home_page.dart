@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text('Alunos'),
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xff2f617e),
+          actions: [IconButton(onPressed: () => controller.getStudentsAndCreateList(context), icon: const Icon(Icons.replay_outlined))],
         ),
         drawer: DrawerMenuWidget(
           addStudents: () => Modular.to.pushNamed(

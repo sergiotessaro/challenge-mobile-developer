@@ -22,6 +22,8 @@ abstract class _LoginControllerBase with Store {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool error = false;
+
   @observable
   bool loading = false;
 
@@ -31,6 +33,7 @@ abstract class _LoginControllerBase with Store {
   @action
   loginAction(BuildContext context) async {
     loading = true;
+    error = false;
     final sharedPreferences = await SharedPreferences.getInstance();
 
     final response = await loginUseCase.getAccounts();
@@ -51,8 +54,11 @@ abstract class _LoginControllerBase with Store {
               }));
           Modular.to.pushReplacementNamed('home_page', arguments: entity);
         } else {
-          showDialogInPage(context, 'Email ou senha incorretos!');
+          error = true;
         }
+      }
+      if (error) {
+        showDialogInPage(context, 'Email ou senha incorretos!');
       }
     });
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/entities/student_entity.dart';
 import '../../domain/usecases/student_usecase.dart';
@@ -57,7 +56,7 @@ abstract class _CreateEditControllerBase with Store {
       showDialogInPage(context, 'Erro no login!\nmensagem de erro:\n${error.message}', null);
     }, (success) async {
       Modular.to.pop();
-      showDialogInPage(context, 'Aluno adicionado com sucesso!', 'Aluno adicionado');
+      showDialogInPage(context, 'Aluno adicionado com sucesso!\n\nAtualize a página para visualizar as mudanças.', 'Aluno adicionado');
     });
 
     loading = false;
@@ -81,7 +80,7 @@ abstract class _CreateEditControllerBase with Store {
       showDialogInPage(context, 'Erro no login!\nmensagem de erro:\n${error.message}', null);
     }, (success) async {
       Modular.to.pop();
-      showDialogInPage(context, 'Aluno editado com sucesso!', 'Aluno editado');
+      showDialogInPage(context, 'Aluno editado com sucesso!\n\nAtualize a página para visualizar as mudanças.', 'Aluno editado');
     });
 
     loading = false;
