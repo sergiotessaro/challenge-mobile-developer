@@ -26,18 +26,20 @@
 #### O que melhoraria se tivesse mais tempo
 
 - Faria todos os testes unitários, deixei alguns de lado por achar que não ia entregar no prazo.
-- Tratamento de erros
-- Diminuiria a repetição de código
+- Tratamento de erros.
+- Diminuiria a repetição de código.
 - Componentização de widgets que foram muito utilizados
 - Utilização de criptografia na persistência de dados.
-- Criar uma branch develop para seguir o Gitflow mais rigorosamente
-- Melhorar qualidade dos commits
+- Criar uma branch develop para seguir o Gitflow mais rigorosamente.
+- Melhorar qualidade dos commits.
+- Adicionar um tratamento de tamanho aos componentes conforme resolução e tamanho de tela.
 
 
 #### Requisitos obrigatórios
 
 - Todos entregues
+- A visualização fica melhor na tela do emulador do Pixel 5, por não haver tratamento de tamanhos dinâmico.
 
 #### Observação
 
-- O apk e aab assinados estão disponíveis na pastas apk_app_folder
+- O apk e aab assinados estão disponíveis na pastas apk_app_folder.
