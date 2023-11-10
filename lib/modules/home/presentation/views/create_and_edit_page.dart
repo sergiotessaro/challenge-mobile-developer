@@ -119,6 +119,7 @@ class _CreateAndEditPageState extends State<CreateAndEditPage> {
                                 const SizedBox(height: 20.0),
                                 TextFormField(
                                   controller: controller.cpfController,
+                                  keyboardType: TextInputType.number,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return '';
@@ -176,6 +177,7 @@ class _CreateAndEditPageState extends State<CreateAndEditPage> {
                                 const SizedBox(height: 20.0),
                                 TextFormField(
                                   controller: controller.emailController,
+                                  keyboardType: TextInputType.emailAddress,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return '';

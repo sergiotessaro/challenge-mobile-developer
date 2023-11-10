@@ -30,6 +30,8 @@
 - Diminuiria a repetição de código
 - Componentização de widgets que foram muito utilizados
 - Utilização de criptografia na persistência de dados.
+- Criar uma branch develop para seguir o Gitflow mais rigorosamente
+- Melhorar qualidade dos commits
 
 
 #### Requisitos obrigatórios
