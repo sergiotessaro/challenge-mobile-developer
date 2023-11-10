@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:student_listing/modules/home/presentation/arguments/create_and_edit_arguments.dart';
+import 'package:student_listing/modules/home/presentation/widget/drawer_menu_widget.dart';
 import 'package:student_listing/modules/login/domain/entities/account_entity.dart';
 
 import '../controller/student_controller.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = Modular.get<StudentController>();
+  final key = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -28,16 +30,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return Scaffold(
+        key: key,
         appBar: AppBar(
           title: const Text('Alunos'),
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xff2f617e),
         ),
+        drawer: DrawerMenuWidget(
+          addStudents: () => Modular.to.pushNamed(
+            'create_edit_page',
+            arguments: const CreateAndEditArguments(edit: false, title: 'Adicionar aluno'),
+          ),
+          logout: () => controller.deleteAccountAndLogout(context),
+        ),
         body: !controller.loading
             ? Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 16.0, left: 16.0, top: 16),
+                    padding: const EdgeInsets.only(right: 16.0, left: 16.0, top: 16.0),
                     child: TextField(
                       controller: controller.sortController,
                       onChanged: (value) {
@@ -149,6 +159,10 @@ class _HomePageState extends State<HomePage> {
             currentIndex: controller.currentIndex,
             onTap: (index) {
               controller.currentIndex = index;
+
+              if (index == 0) {
+                _showdrawer();
+              }
             },
             showUnselectedLabels: true,
             unselectedLabelStyle: const TextStyle(color: Colors.grey),
@@ -164,5 +178,9 @@ class _HomePageState extends State<HomePage> {
             ]),
       );
     });
+  }
+
+  _showdrawer() {
+    key.currentState!.openDrawer();
   }
 }

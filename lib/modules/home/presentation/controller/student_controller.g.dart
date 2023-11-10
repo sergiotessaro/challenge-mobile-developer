@@ -77,6 +77,16 @@ mixin _$StudentController on _StudentControllerBase, Store {
         .run(() => super._deleteStudentAction(context, id));
   }
 
+  late final _$deleteAccountAndLogoutAsyncAction = AsyncAction(
+      '_StudentControllerBase.deleteAccountAndLogout',
+      context: context);
+
+  @override
+  Future deleteAccountAndLogout(BuildContext context) {
+    return _$deleteAccountAndLogoutAsyncAction
+        .run(() => super.deleteAccountAndLogout(context));
+  }
+
   late final _$_StudentControllerBaseActionController =
       ActionController(name: '_StudentControllerBase', context: context);
 

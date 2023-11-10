@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:student_listing/modules/home/domain/entities/student_entity.dart';
 import 'package:student_listing/modules/home/domain/usecases/student_usecase.dart';
 
@@ -74,6 +75,19 @@ abstract class _StudentControllerBase with Store {
     } else if (value == '' || value == null) {
       studentList = auxList;
     }
+  }
+
+  @action
+  deleteAccountAndLogout(BuildContext context) async {
+    loading = true;
+
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    sharedPreferences.remove('account');
+
+    Modular.to.pushNamed('/');
+
+    loading = false;
   }
 
   @action

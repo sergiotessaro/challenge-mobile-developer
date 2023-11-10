@@ -51,8 +51,27 @@ mixin _$CreateEditController on _CreateEditControllerBase, Store {
         .run(() => super.registerStudent(context));
   }
 
+  late final _$editStudentAsyncAction =
+      AsyncAction('_CreateEditControllerBase.editStudent', context: context);
+
+  @override
+  Future editStudent(BuildContext context, String id) {
+    return _$editStudentAsyncAction.run(() => super.editStudent(context, id));
+  }
+
   late final _$_CreateEditControllerBaseActionController =
       ActionController(name: '_CreateEditControllerBase', context: context);
+
+  @override
+  dynamic mountScreenControllers(StudentEntity entity) {
+    final _$actionInfo = _$_CreateEditControllerBaseActionController
+        .startAction(name: '_CreateEditControllerBase.mountScreenControllers');
+    try {
+      return super.mountScreenControllers(entity);
+    } finally {
+      _$_CreateEditControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic showDialogInPage(
