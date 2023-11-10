@@ -37,3 +37,7 @@
 #### Requisitos obrigatórios
 
 - Todos entregues
+
+#### Observação
+
+- O apk e aab assinados estão disponíveis na pastas apk_app_folder
