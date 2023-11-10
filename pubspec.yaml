@@ -19,6 +19,7 @@ dependencies:
   flutter_modular: ^6.3.2
   equatable: ^2.0.5
   shared_preferences: ^2.2.2
+  brasil_fields: ^1.14.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,15 @@ dev_dependencies:
   mocktail: ^0.3.0
   flutter_lints: ^2.0.0
   build_runner: ^2.0.5
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/launcher_icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  
 
 flutter:
   uses-material-design: true

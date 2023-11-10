@@ -150,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0))),
                                     backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xff2f617e)),
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      controller.loginAction(context);
+                                      await controller.loginAction(context);
                                     }
                                   },
                                   child: const Text('Entrar'),
@@ -191,7 +191,11 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               )
-            : const Center(child: CircularProgressIndicator()),
+            : const Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xff2f617e),
+                ),
+              ),
       );
     });
   }
