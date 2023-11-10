@@ -21,7 +21,7 @@
     -mocktail: ^0.3.0
     -build_runner: ^2.0.5
     -shared_preferences: ^2.2.2
-    - brasil_fields: ^1.14.0
+    -brasil_fields: ^1.14.0
 
 #### O que melhoraria se tivesse mais tempo
 
@@ -29,3 +29,9 @@
 - Tratamento de erros
 - Diminuiria a repetição de código
 - Componentização de widgets que foram muito utilizados
+- Utilização de criptografia na persistência de dados.
+
+
+#### Requisitos obrigatórios
+
+- Todos entregues
