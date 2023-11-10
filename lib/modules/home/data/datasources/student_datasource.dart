@@ -6,6 +6,7 @@ abstract class IStudentDatasource {
   Future<StudentModel> register({StudentModel? studentModel});
   Future<List<StudentModel>> getStudents();
   Future<StudentModel> getStudentById({required String id});
+  Future<StudentModel> editStudent({required String id, required StudentModel studentModel});
   Future<bool> deleteStudent({required String id});
 }
 
@@ -43,10 +44,22 @@ class StudentDatasource implements IStudentDatasource {
   }
 
   @override
+  Future<StudentModel> editStudent({required String id, required StudentModel studentModel}) async {
+    final response = await dio.put(
+      'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/student/$id',
+      data: studentModel.toJson()
+    );
+
+    return StudentModel.fromJson(response.data);
+  }
+
+  @override
   Future<bool> deleteStudent({required String id}) async {
     final response = await dio.delete(
       'https://653c0826d5d6790f5ec7c664.mockapi.io/api/v1/student/$id',
     );
+
+    print(response.data);
 
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
       return true;

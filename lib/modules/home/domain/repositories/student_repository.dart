@@ -8,5 +8,6 @@ abstract class IStudentRepository {
   Future<Either<Failure, StudentEntity>> register({required StudentModel studentModel});
   Future<Either<Failure, List<StudentEntity>>> getStudents();
   Future<Either<Failure, StudentEntity>> getStudentById({required String id});
+  Future<Either<Failure, StudentEntity>> editStudent({required String id, required StudentModel studentModel});
   Future<Either<Failure, bool>> deleteStudent({required String id});
 }

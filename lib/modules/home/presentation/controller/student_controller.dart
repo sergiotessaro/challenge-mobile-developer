@@ -17,6 +17,8 @@ class StudentController extends _StudentControllerBase with _$StudentController 
 abstract class _StudentControllerBase with Store {
   late StudentUseCase studentUseCase;
 
+  final sortController = TextEditingController();
+
   @observable
   bool loading = false;
 
@@ -25,6 +27,8 @@ abstract class _StudentControllerBase with Store {
 
   @observable
   List<StudentEntity> studentList = [];
+
+  List<StudentEntity> auxList = [];
 
   @action
   getStudentsAndCreateList(BuildContext context) async {
@@ -36,6 +40,7 @@ abstract class _StudentControllerBase with Store {
       showErrorDialogInPage(context, 'Erro no login!\nmensagem de erro:\n${error.message}');
     }, (entityList) {
       studentList = entityList;
+      auxList = studentList;
     });
 
     loading = false;
@@ -49,9 +54,26 @@ abstract class _StudentControllerBase with Store {
 
     result.fold((error) {
       showErrorDialogInPage(context, 'Erro no login!\nmensagem de erro:\n${error.message}');
-    }, (entityList) {});
+    }, (success) async {
+      if (success) {
+        Modular.to.pop();
+        await getStudentsAndCreateList(context);
+      }
+    });
 
     loading = false;
+  }
+
+  getSortedList(String? value) {
+    if (value != null && value.isNotEmpty) {
+      List<StudentEntity> outputList = studentList.where((o) => o.name!.toUpperCase().contains(value.toUpperCase()) && o.name!.toUpperCase().startsWith(value.toUpperCase())).toList()
+        ..sort((a, b) => a.name!.toUpperCase().compareTo(
+              b.name!.toUpperCase(),
+            ));
+      studentList = outputList;
+    } else if (value == '' || value == null) {
+      studentList = auxList;
+    }
   }
 
   @action

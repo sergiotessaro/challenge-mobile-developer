@@ -16,7 +16,7 @@ class StudentRepository implements IStudentRepository {
   @override
   Future<Either<Failure, StudentEntity>> register({required StudentModel studentModel}) async {
     try {
-      final response = await _studentDatasource.register();
+      final response = await _studentDatasource.register(studentModel: studentModel);
       return Right(response.toEntity());
     } on TimeoutException {
       return Left(Failure.timeout());
@@ -41,6 +41,18 @@ class StudentRepository implements IStudentRepository {
   Future<Either<Failure, StudentEntity>> getStudentById({required String id}) async {
     try {
       final response = await _studentDatasource.getStudentById(id: id);
+      return Right(response.toEntity());
+    } on TimeoutException {
+      return Left(Failure.timeout());
+    } catch (e) {
+      return Left(Failure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<Failure, StudentEntity>> editStudent({required String id, required StudentModel studentModel}) async {
+    try {
+      final response = await _studentDatasource.editStudent(id: id, studentModel: studentModel);
       return Right(response.toEntity());
     } on TimeoutException {
       return Left(Failure.timeout());

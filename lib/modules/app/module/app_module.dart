@@ -10,6 +10,7 @@ import 'package:student_listing/modules/login/domain/usecases/login_usecase.dart
 import 'package:student_listing/modules/login/presentation/controller/login_controller.dart';
 import 'package:student_listing/modules/login/presentation/views/login_page.dart';
 
+import '../../home/presentation/controller/create_edit_controller.dart';
 import '../../home/presentation/controller/student_controller.dart';
 import '../../home/presentation/views/home_page.dart';
 
@@ -35,6 +36,7 @@ class AppModule extends Module {
     //controller
     i.add(LoginController.new);
     i.add(StudentController.new);
+    i.add(CreateEditController.new);
   }
 
   @override
@@ -43,6 +45,6 @@ class AppModule extends Module {
 
     r.child('/home_page', child: (context) => HomePage(accountEntity: r.args.data));
 
-    r.child('/create_edit_page', child: (context) => CreateAndEditPage(args: r.args.data)); 
+    r.child('/create_edit_page', child: (context) => CreateAndEditPage(args: r.args.data));
   }
 }

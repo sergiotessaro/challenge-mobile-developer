@@ -191,7 +191,11 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               )
-            : const Center(child: CircularProgressIndicator()),
+            : const Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xff2f617e),
+                ),
+              ),
       );
     });
   }
