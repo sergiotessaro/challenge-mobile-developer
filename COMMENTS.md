@@ -1,6 +1,6 @@
 #### Decisão de arquitetura
 
-- Utilizado Clean Architecture por ser uma arquitetura sólida, de fácil manutenção e organização robusta.
+- Utilizado Clean Architecture por ser uma arquitetura sólida, de fácil manutenção e organização robusta, apesar de não ser a mais ideal para aplicativos de menor complexidade, fiz pensando em uma possível escalonabilidade do projeto, além de que o app fica desacoplado e deixa mais fácil testá-lo.
 - Foram utilizados alguns principios do **SOLID** nos exemplos abaixo:
     - S: Responsabilidade única, por exemplo, a classe de LoginDatasource, ela é responsável apenas pelas funções de login do app.
     - O: Aberto/Fechado, utilizando do mesmo exemplo, a interface de LoginDatasource está aberta a extensões sem ter que refatorar a classe, assim deixando-a fechada para modificações.

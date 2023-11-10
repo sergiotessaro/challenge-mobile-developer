@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:student_listing/modules/home/data/datasources/student_datasource.dart';
 import 'package:student_listing/modules/home/data/repositories/student_repository.dart';
 import 'package:student_listing/modules/home/domain/usecases/student_usecase.dart';
+import 'package:student_listing/modules/home/presentation/views/create_and_edit_page.dart';
 import 'package:student_listing/modules/login/data/datasources/login_datasource.dart';
 import 'package:student_listing/modules/login/data/repositories/login_repository.dart';
 import 'package:student_listing/modules/login/domain/usecases/login_usecase.dart';
@@ -41,5 +42,7 @@ class AppModule extends Module {
     r.child('/', child: (context) => const LoginPage());
 
     r.child('/home_page', child: (context) => HomePage(accountEntity: r.args.data));
+
+    r.child('/create_edit_page', child: (context) => CreateAndEditPage(args: r.args.data)); 
   }
 }

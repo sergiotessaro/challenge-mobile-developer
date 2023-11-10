@@ -33,7 +33,7 @@ class StudentRepository implements IStudentRepository {
     } on TimeoutException {
       return Left(Failure.timeout());
     } catch (e) {
-      return Left(Failure.serverError());
+      return Left(Failure.serverError(e.toString()));
     }
   }
 
@@ -57,7 +57,7 @@ class StudentRepository implements IStudentRepository {
     } on TimeoutException {
       return Left(Failure.timeout());
     } catch (e) {
-      return Left(Failure.serverError());
+      return Left(Failure.serverError(e.toString()));
     }
   }
 }

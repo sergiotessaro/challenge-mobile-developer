@@ -7,10 +7,10 @@ import 'package:student_listing/modules/home/domain/usecases/student_usecase.dar
 part 'student_controller.g.dart';
 
 class StudentController extends _StudentControllerBase with _$StudentController {
-  final StudentUseCase studentUseCase;
+  final StudentUseCase _studentUseCase;
 
-  StudentController(this.studentUseCase) {
-    super.studentUseCase = studentUseCase;
+  StudentController(this._studentUseCase) {
+    super.studentUseCase = _studentUseCase;
   }
 }
 
@@ -19,6 +19,9 @@ abstract class _StudentControllerBase with Store {
 
   @observable
   bool loading = false;
+
+  @observable
+  int currentIndex = 0;
 
   @observable
   List<StudentEntity> studentList = [];
@@ -30,7 +33,7 @@ abstract class _StudentControllerBase with Store {
     final result = await studentUseCase.getStudents();
 
     result.fold((error) {
-      showDialogInPage(context, 'Erro no login!\nmensagem de erro:\n$error');
+      showErrorDialogInPage(context, 'Erro no login!\nmensagem de erro:\n${error.message}');
     }, (entityList) {
       studentList = entityList;
     });
@@ -39,7 +42,56 @@ abstract class _StudentControllerBase with Store {
   }
 
   @action
-  showDialogInPage(BuildContext context, String message) {
+  _deleteStudentAction(BuildContext context, String id) async {
+    loading = true;
+
+    final result = await studentUseCase.deleteStudent(id: id);
+
+    result.fold((error) {
+      showErrorDialogInPage(context, 'Erro no login!\nmensagem de erro:\n${error.message}');
+    }, (entityList) {});
+
+    loading = false;
+  }
+
+  @action
+  showConfirmationDialog(BuildContext context, String id) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            width: 250,
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+              title: const Text('Excluir aluno'),
+              content: const Expanded(
+                child: Text(
+                  'Tem certeza que deseja excluir esse aluno? Todas as informações dele serão apagadas.',
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Modular.to.pop(),
+                  child: const Text(
+                    'Cancelar',
+                    style: TextStyle(color: Color(0xff2f617e)),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => _deleteStudentAction(context, id),
+                  child: const Text(
+                    'Excluir Aluno',
+                    style: TextStyle(color: Color(0xff2f617e)),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  @action
+  showErrorDialogInPage(BuildContext context, String message) {
     showDialog(
         context: context,
         builder: (context) {

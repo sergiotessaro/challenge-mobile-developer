@@ -1,0 +1,21 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "quickfix.add.required": true,
+        "quickfix.add.required.multi": true,
+        "quickfix.create.constructorForFinalFields": true,
+        // "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "editor.formatOnType": true,
+    "editor.rulers": [
+        250
+    ],
+    "dart.lineLength": 250,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false,
+    "editor.wordWrapColumn": 250
+}

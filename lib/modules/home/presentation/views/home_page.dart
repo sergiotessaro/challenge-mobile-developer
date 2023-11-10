@@ -25,87 +25,123 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Observer(builder: (context) {
+      return Scaffold(
         appBar: AppBar(
           title: const Text('Alunos'),
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xff2f617e),
         ),
-        body: Observer(builder: (context) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0, left: 16.0, top: 16),
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Buscar...',
-                      prefixIcon: const Icon(Icons.search, color: Color(0xff2f617e)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide: const BorderSide(color: Color(0xff2f617e)),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide: const BorderSide(color: Color(0xff2f617e)),
-                      )),
-                ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0, left: 16.0, top: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Buscar...',
+                    prefixIcon: const Icon(Icons.search, color: Color(0xff2f617e)),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                      borderSide: const BorderSide(color: Color(0xff2f617e)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                      borderSide: const BorderSide(color: Color(0xff2f617e)),
+                    )),
               ),
-              ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
-                  shrinkWrap: true,
-                  itemCount: controller.studentList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      margin: const EdgeInsets.symmetric(vertical: 10.0),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      elevation: 2.5,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
-                        child: Column(
-                          children: [
-                            Row(
+            ),
+            ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
+                shrinkWrap: true,
+                itemCount: controller.studentList.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 10.0),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    elevation: 2.5,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                controller.studentList[index].name!,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  splashRadius: 20,
+                                  icon: const Icon(
+                                    Icons.edit_outlined,
+                                    color: Color(0xff2f617e),
+                                  ))
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4.0),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  controller.studentList[index].name!,
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  '${controller.studentList[index].academicRecord!}\nCPF: ${controller.studentList[index].cpf!}',
+                                  style: const TextStyle(fontSize: 14, height: 1.5),
                                 ),
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      controller.showConfirmationDialog(context, controller.studentList[index].id!);
+                                    },
                                     splashRadius: 20,
                                     icon: const Icon(
-                                      Icons.edit_outlined,
+                                      Icons.delete_outline_rounded,
                                       color: Color(0xff2f617e),
                                     ))
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${controller.studentList[index].academicRecord!}\nCPF: ${controller.studentList[index].cpf!}',
-                                    style: TextStyle(fontSize: 14, height: 1.5),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      splashRadius: 20,
-                                      icon: const Icon(
-                                        Icons.delete_outline_rounded,
-                                        color: Color(0xff2f617e),
-                                      ))
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  })
-            ],
-          );
-        }));
+                    ),
+                  );
+                })
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: const Color(0xff2f617e),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+            label: const Row(
+              children: [
+                Icon(Icons.add),
+                SizedBox(
+                  width: 8,
+                ),
+                Text('Adicionar Aluno')
+              ],
+            ),
+            onPressed: () {}),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            useLegacyColorScheme: false,
+            currentIndex: 0,
+            onTap: (index) {
+              controller.currentIndex = index;
+            },
+            showUnselectedLabels: true,
+            unselectedLabelStyle: const TextStyle(color: Colors.grey),
+            selectedLabelStyle: const TextStyle(color: Colors.black),
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey,
+            selectedFontSize: 12,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Menu'),
+              BottomNavigationBarItem(icon: Icon(Icons.help_outline), label: 'Ajuda'),
+              BottomNavigationBarItem(icon: Icon(Icons.notifications_none_outlined), label: 'Notificações'),
+              BottomNavigationBarItem(icon: Icon(Icons.person_outline_rounded), label: 'Perfil'),
+            ]),
+      );
+    });
   }
 }

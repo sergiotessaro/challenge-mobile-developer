@@ -3,11 +3,10 @@ import 'package:equatable/equatable.dart';
 class StudentModel extends Equatable {
   final String createdAt;
   final String name;
-  final int birthdate;
-  final int cpf;
+  final String birthdate;
+  final String cpf;
   final String email;
-  final int academicRecord;
-  final int academicRecord2;
+  final String academicRecord;
   final String id;
 
   const StudentModel({
@@ -17,19 +16,17 @@ class StudentModel extends Equatable {
     required this.cpf,
     required this.email,
     required this.academicRecord,
-    required this.academicRecord2,
     required this.id,
   });
 
   factory StudentModel.fromJson(Map<String, dynamic> json) => StudentModel(
         createdAt: json["createdAt"],
         name: json["name"],
-        birthdate: json["birthdate"],
-        cpf: json["cpf"],
+        birthdate: json["birthdate"].toString(),
+        cpf: json["cpf"].toString(),
         email: json["email"],
-        academicRecord: json["academic_record"],
-        academicRecord2: json["academicRecord"],
-        id: json["id"],
+        academicRecord: json["academic_record"].toString(),
+        id: json["id"].toString(),
       );
 
   static List<StudentModel> fromListJson(List maps) => maps.map((e) => StudentModel.fromJson(e)).toList();
@@ -50,7 +47,6 @@ class StudentModel extends Equatable {
         cpf,
         email,
         academicRecord,
-        academicRecord2,
         id,
       ];
 }
